@@ -8,11 +8,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 public class Restaurant extends Place{
     @Builder
     public Restaurant(String name, int rating, int distance, int price, Cuisine cuisine) {
