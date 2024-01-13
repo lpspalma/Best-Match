@@ -18,5 +18,5 @@ public class RestaurantDTO {
     private String price;
 
     @CsvBindByName(column = "cuisine_id")
-    private String cuisineId;
+    private String cuisine;
 }
