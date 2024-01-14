@@ -33,6 +33,7 @@ public class RestaurantService extends DTOBuilder<Restaurant, RestaurantDTO> {
     }
 
     public List<RestaurantDTO> findBestMatch(RestaurantDTO dto) {
+        log.info("Parameters received: "+dto);
         List<Restaurant> restaurants =
                 restaurantRepository.findByCuisineNameContainingIgnoreCaseAndNameContainingIgnoreCase(dto.getCuisine(), dto.getName(), Sort.by("distance")).orElse(Collections.emptyList());
         return restaurants.stream()
@@ -40,6 +41,7 @@ public class RestaurantService extends DTOBuilder<Restaurant, RestaurantDTO> {
                         restaurant.getDistance() <= (dto.getDistance().isEmpty() ? 10 : Integer.parseInt(dto.getDistance())) &&
                                 restaurant.getRating() >= (dto.getRating().isEmpty() ? 0 : Integer.parseInt(dto.getRating())) &&
                                 restaurant.getPrice() <= (dto.getPrice().isEmpty() ? 50 : Integer.parseInt(dto.getPrice())))
+                .limit(5)
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }

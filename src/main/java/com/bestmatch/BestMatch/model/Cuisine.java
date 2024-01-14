@@ -15,6 +15,8 @@ import java.util.List;
 @Data
 @Entity
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Cuisine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

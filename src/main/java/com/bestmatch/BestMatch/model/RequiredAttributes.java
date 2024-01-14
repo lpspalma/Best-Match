@@ -14,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @MappedSuperclass
-public class Place {
+public class RequiredAttributes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,7 +23,7 @@ public class Place {
     private int distance;
     private int price;
 
-    public Place(String name, int rating, int distance, int price) {
+    public RequiredAttributes(String name, int rating, int distance, int price) {
         this.name = name;
         this.rating = rating;
         this.distance = distance;

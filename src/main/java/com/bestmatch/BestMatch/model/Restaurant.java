@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @NoArgsConstructor
-public class Restaurant extends Place{
+public class Restaurant extends RequiredAttributes {
     @Builder
     public Restaurant(String name, int rating, int distance, int price, Cuisine cuisine) {
         super(name, rating, distance, price);
