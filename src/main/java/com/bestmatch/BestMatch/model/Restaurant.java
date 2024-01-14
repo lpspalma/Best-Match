@@ -11,6 +11,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 @Entity
@@ -38,5 +40,17 @@ public class Restaurant extends RequiredAttributes {
                 super.toString() +
                 ", cuisine=" + cuisine.getName() +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Restaurant that)) return false;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getCuisine(), that.getCuisine());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getCuisine());
     }
 }
