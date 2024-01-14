@@ -50,12 +50,12 @@ public class RestaurantService extends FilterService<Restaurant> implements DTOB
     }
 
     private RestaurantDTO convertToDTO(Restaurant restaurant) {
-        RestaurantDTO restaurantDTO = new RestaurantDTO();
-        restaurantDTO.setName(restaurant.getName());
-        restaurantDTO.setRating(String.valueOf(restaurant.getRating()));
-        restaurantDTO.setDistance(String.valueOf(restaurant.getDistance()));
-        restaurantDTO.setPrice(String.valueOf(restaurant.getPrice()));
-        restaurantDTO.setCuisine(restaurant.getCuisine().getName());
-        return restaurantDTO;
+        return RestaurantDTO.builder()
+                .name(restaurant.getName())
+                .rating(String.valueOf(restaurant.getRating()))
+                .distance(String.valueOf(restaurant.getDistance()))
+                .price(String.valueOf(restaurant.getPrice()))
+                .cuisine(restaurant.getCuisine().getName())
+                .build();
     }
 }
