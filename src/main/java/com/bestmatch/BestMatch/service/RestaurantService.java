@@ -10,16 +10,23 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-public class RestaurantService extends DTOBuilder<Restaurant, RestaurantDTO> {
+public class RestaurantService extends FilterService<Restaurant> implements DTOBuilder<Restaurant, RestaurantDTO> {
     @Autowired
     private RestaurantRepository restaurantRepository;
 
     @Autowired
     private CuisineService cuisineService;
+
+    public List<RestaurantDTO> findBestMatch(RestaurantDTO dto) {
+        log.info("Parameters received: " + dto);
+        List<Restaurant> restaurants =
+                restaurantRepository.findByCuisineNameContainingIgnoreCaseAndNameContainingIgnoreCase(dto.getCuisine(), dto.getName(), Sort.by("distance")).orElse(Collections.emptyList());
+        restaurants = filterDistanceRatingAndPrice(dto.getDistance(), dto.getRating(), dto.getPrice(), restaurants);
+        return restaurants.stream().limit(5).map(this::convertToDTO).toList();
+    }
 
     @Override
     public Restaurant build(RestaurantDTO dto) {
@@ -32,18 +39,14 @@ public class RestaurantService extends DTOBuilder<Restaurant, RestaurantDTO> {
                 .build();
     }
 
-    public List<RestaurantDTO> findBestMatch(RestaurantDTO dto) {
-        log.info("Parameters received: "+dto);
-        List<Restaurant> restaurants =
-                restaurantRepository.findByCuisineNameContainingIgnoreCaseAndNameContainingIgnoreCase(dto.getCuisine(), dto.getName(), Sort.by("distance")).orElse(Collections.emptyList());
-        return restaurants.stream()
+    @Override
+    List<Restaurant> filterDistanceRatingAndPrice(String distance, String rating, String price, List<Restaurant> list) {
+        return list.stream()
                 .filter(restaurant ->
-                        restaurant.getDistance() <= (dto.getDistance().isEmpty() ? 10 : Integer.parseInt(dto.getDistance())) &&
-                                restaurant.getRating() >= (dto.getRating().isEmpty() ? 0 : Integer.parseInt(dto.getRating())) &&
-                                restaurant.getPrice() <= (dto.getPrice().isEmpty() ? 50 : Integer.parseInt(dto.getPrice())))
-                .limit(5)
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+                        restaurant.getDistance() <= (distance.isEmpty() ? 10 : Integer.parseInt(distance)) &&
+                                restaurant.getRating() >= (rating.isEmpty() ? 0 : Integer.parseInt(rating)) &&
+                                restaurant.getPrice() <= (price.isEmpty() ? 50 : Integer.parseInt(price)))
+                .toList();
     }
 
     private RestaurantDTO convertToDTO(Restaurant restaurant) {
