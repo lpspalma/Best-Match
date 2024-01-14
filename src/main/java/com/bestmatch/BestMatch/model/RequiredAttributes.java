@@ -1,8 +1,5 @@
 package com.bestmatch.BestMatch.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,21 +12,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @MappedSuperclass
 public class RequiredAttributes {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String name;
     private int rating;
     private int distance;
     private int price;
-
-    public RequiredAttributes(String name, int rating, int distance, int price) {
-        this.name = name;
-        this.rating = rating;
-        this.distance = distance;
-        this.price = price;
-    }
-
     @Override
     public String toString() {
         return
