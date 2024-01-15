@@ -23,7 +23,12 @@ public class RestaurantService extends FilterService<Restaurant> implements DTOB
     public List<RestaurantDTO> findBestMatch(RestaurantDTO dto) {
         log.info("Parameters received: " + dto);
         List<Restaurant> restaurants =
-                restaurantRepository.findByCuisineNameContainingIgnoreCaseAndNameContainingIgnoreCase(dto.getCuisine(), dto.getName(), Sort.by("distance")).orElse(Collections.emptyList());
+                restaurantRepository
+                        .findByCuisineNameContainingIgnoreCaseAndNameContainingIgnoreCase(
+                                dto.getCuisine(),
+                                dto.getName(),
+                                Sort.by("distance", "rating", "price"))
+                        .orElse(Collections.emptyList());
         restaurants = filterDistanceRatingAndPrice(dto.getDistance(), dto.getRating(), dto.getPrice(), restaurants);
         return restaurants.stream().limit(5).map(this::convertToDTO).toList();
     }
