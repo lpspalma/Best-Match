@@ -13,7 +13,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>BestMatch</name>
 	<description>APP to choose the best option</description>
-	<packaging>war</packaging>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
