@@ -21,11 +21,11 @@ public class RestaurantDTO {
     @CsvBindByName(column = "customer_rating")
     private String rating;
 
-    @Pattern(regexp = "^$|\\d+", message = "Wrong Format")
+    @Pattern(regexp = "^$|\\d+", message = "Wrong Format - Only accept numbers")
     @CsvBindByName(column = "distance")
     private String distance;
 
-    @Pattern(regexp = "^$|\\d+", message = "Wrong Format")
+    @Pattern(regexp = "^$|\\d+", message = "Wrong Format - Only accept numbers")
     @CsvBindByName(column = "price")
     private String price;
 

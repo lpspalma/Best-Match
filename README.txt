@@ -36,15 +36,15 @@ To use the app you should
                 Maximum 5 Restaurants in the response list.
             ii. 200 - Success - Not found any matches
                 When the app did not find any matches that meets the search criteria, then the response will be Status
-                200 but an empty list.
+                200 but with an empty list.
             iii. 400 - Bad Request
-                When the user doesn't respect the format of the fields than the response will be a list with all the
+                When the user doesn't respect the format of the fields then the response will be a list with all the
                 errors found.
             iv. 500 - Server Error
                 The application did not start properly.
 
     All the data is already added in the DataBase, so, there are no need to upload any file in application.
-    But if there are any need to update the location of the file restaurant.csv, them you can go to
-    application.properties and change the path for this file.
+    But if there are any need to update the location of the file restaurant.csv and cuisine.csv, them you can go to
+    application.properties and change the path for these files.
     If add or remove items in the csv files, them restart the application, that the Data Base will be
     updated automatically.
