@@ -59,7 +59,7 @@ public class RestaurantServiceTest {
                 .cuisine(cuisine2)
                 .build();
         dto = RestaurantDTO.builder()
-                .name("restaurant1")
+                .restaurantName("restaurant1")
                 .rating("5")
                 .price("10")
                 .distance("2")

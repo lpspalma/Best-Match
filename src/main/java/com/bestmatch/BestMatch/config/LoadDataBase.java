@@ -20,10 +20,10 @@ import java.util.List;
 public class LoadDataBase {
     private static final String PRELOADING = "Preloading ";
 
-    @Value("${preload.cuisinesCsvPath:}")
+    @Value("${preload.cuisinesCsvFile:}")
     private String cuisinesCsvPath;
 
-    @Value("${preload.restaurantsCsvPath:}")
+    @Value("${preload.restaurantsCsvFile:}")
     private String restaurantsCsvPath;
 
     @Bean

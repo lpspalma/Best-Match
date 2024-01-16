@@ -26,7 +26,7 @@ public class RestaurantService extends FilterService<Restaurant> implements DTOB
                 restaurantRepository
                         .findByCuisineNameContainingIgnoreCaseAndNameContainingIgnoreCase(
                                 dto.getCuisine(),
-                                dto.getName(),
+                                dto.getRestaurantName(),
                                 Sort.by("distance", "rating", "price"))
                         .orElse(Collections.emptyList());
         restaurants = filterDistanceRatingAndPrice(dto.getDistance(), dto.getRating(), dto.getPrice(), restaurants);
@@ -36,7 +36,7 @@ public class RestaurantService extends FilterService<Restaurant> implements DTOB
     @Override
     public Restaurant build(RestaurantDTO dto) {
         return Restaurant.builder()
-                .name(dto.getName())
+                .name(dto.getRestaurantName())
                 .rating(Integer.parseInt(dto.getRating()))
                 .distance(Integer.parseInt(dto.getDistance()))
                 .price(Integer.parseInt(dto.getPrice()))
@@ -56,7 +56,7 @@ public class RestaurantService extends FilterService<Restaurant> implements DTOB
 
     private RestaurantDTO convertToDTO(Restaurant restaurant) {
         return RestaurantDTO.builder()
-                .name(restaurant.getName())
+                .restaurantName(restaurant.getName())
                 .rating(String.valueOf(restaurant.getRating()))
                 .distance(String.valueOf(restaurant.getDistance()))
                 .price(String.valueOf(restaurant.getPrice()))

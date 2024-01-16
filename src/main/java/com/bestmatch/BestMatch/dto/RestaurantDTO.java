@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class RestaurantDTO {
     @Size(max = 50, message = "Name too long, maximum 50 characters allowed")
     @CsvBindByName(column = "name")
-    private String name;
+    private String restaurantName;
 
     @Pattern(regexp = "^$|[1-5]", message = "Wrong Format, Rating should be values between 1 and 5")
     @CsvBindByName(column = "customer_rating")
